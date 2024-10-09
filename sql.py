@@ -15,20 +15,27 @@ def create_connection(host_name, user_name, user_password, db_name):
         print(f"the error '{e}' occurred")
     return connection
 
-def execute_query(connection, query):
+def execute_query(connection, query, params=None):
     cursor = connection.cursor()
     try:
-        cursor.execute(query)
+        if params:
+            cursor.execute(query, params)  # Execute with parameters
+        else:
+            cursor.execute(query)  # Execute without parameters
         connection.commit()
         print("query executed successfully")
     except Error as e:
         print(f"the error '{e}' occurred")
 
-def execute_read_query(connection, query):
+
+def execute_read_query(connection, query, params=None):
     cursor = connection.cursor(dictionary=True)
     result = None
     try:
-        cursor.execute(query)
+        if params:
+            cursor.execute(query, params)  # Execute with parameters
+        else:
+            cursor.execute(query)  # Execute without parameters
         result = cursor.fetchall()
         return result
     except Error as e:

@@ -20,20 +20,22 @@ def create_investor():
         lastname = data['lastname']
         
         query = "INSERT INTO investor (firstname, lastname) VALUES (%s, %s)"
-        execute_query(conn, query, (firstname, lastname))
+        execute_query(conn, query, (firstname, lastname))  # Pass the parameters
         
         return jsonify({"message": "Investor created successfully"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+
 @app.route('/api/investor/<int:id>', methods=['GET'])
 def get_investor(id):
     try:
         query = "SELECT * FROM investor WHERE id = %s"
-        investor = execute_read_query(conn, query, (id,))
+        investor = execute_read_query(conn, query, (id,))  # Pass ID as parameter
         return jsonify(investor), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
 
 @app.route('/api/investor/<int:id>', methods=['PUT'])
 def update_investor(id):
