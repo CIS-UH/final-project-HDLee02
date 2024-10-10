@@ -166,6 +166,7 @@ def delete_bond(id):
 def create_stock_transaction():
     try:
         data = request.get_json()
+        print(data)  # Add this to see the received data
         investorid = data['investorid']
         stockid = data['stockid']
         quantity = data['quantity']
@@ -176,6 +177,7 @@ def create_stock_transaction():
         return jsonify({"message": "Stock transaction created successfully"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
     
 # GET all stock transactions or a specific transaction by ID
 @app.route('/api/stocktransaction', methods=['GET'])
