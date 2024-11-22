@@ -1,0 +1,38 @@
+<%- include('layout', { title: 'Stock Transactions' }) %>
+<div class="container">
+    <h1>Stock Transactions</h1>
+    <form action="/stocktransactions" method="POST">
+        <input type="number" name="investorid" placeholder="Investor ID" required>
+        <input type="number" name="stockid" placeholder="Stock ID" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <button type="submit">Add Stock Transaction</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Investor ID</th>
+                <th>Stock ID</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% stocktransactions.forEach(function(transaction) { %>
+                <tr>
+                    <td><%= transaction.investorid %></td>
+                    <td><%= transaction.stockid %></td>
+                    <td><%= transaction.quantity %></td>
+                    <td>
+                        <form action="/stocktransactions/delete/<%= transaction.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <form action="/stocktransactions/update/<%= transaction.id %>" method="POST" style="display:inline;">
+                            <input type="number" name="quantity" value="<%= transaction.quantity %>" required>
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

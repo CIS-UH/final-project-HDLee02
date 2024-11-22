@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <h1>Investors</h1>
+        <form action="/investors" method="POST">
+            <input type="text" name="firstname" placeholder="First Name" required>
+            <input type="text" name="lastname" placeholder="Last Name" required>
+            <button type="submit">Add Investor</button>
+        </form>
+        <ul>
+            <% investors.forEach(function(investor) { %>
+                <li><%= investor.firstname %> <%= investor.lastname %></li>
+            <% }) %>
+        </ul>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

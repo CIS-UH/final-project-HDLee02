@@ -1,0 +1,38 @@
+<%- include('layout', { title: 'Bond Transactions' }) %>
+<div class="container">
+    <h1>Bond Transactions</h1>
+    <form action="/bondtransactions" method="POST">
+        <input type="number" name="investorid" placeholder="Investor ID" required>
+        <input type="number" name="bondid" placeholder="Bond ID" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <button type="submit">Add Bond Transaction</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Investor ID</th>
+                <th>Bond ID</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bondtransactions.forEach(function(transaction) { %>
+                <tr>
+                    <td><%= transaction.investorid %></td>
+                    <td><%= transaction.bondid %></td>
+                    <td><%= transaction.quantity %></td>
+                    <td>
+                        <form action="/bondtransactions/delete/<%= transaction.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <form action="/bondtransactions/update/<%= transaction.id %>" method="POST" style="display:inline;">
+                            <input type="number" name="quantity" value="<%= transaction.quantity %>" required>
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

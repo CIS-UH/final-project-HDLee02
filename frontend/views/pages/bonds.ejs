@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <h1>Bonds</h1>
+        <form action="/bonds" method="POST">
+            <input type="text" name="bondname" placeholder="Bond Name" required>
+            <input type="text" name="abbreviation" placeholder="Abbreviation" required>
+            <input type="number" name="currentprice" placeholder="Current Price" required>
+            <button type="submit">Add Bond</button>
+        </form>
+        <ul>
+            <% bonds.forEach(function(bond) { %>
+                <li><%= bond.bondname %> (<%= bond.abbreviation %>) - $<%= bond.currentprice %></li>
+            <% }) %>
+        </ul>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

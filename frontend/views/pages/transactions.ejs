@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <h1>Transactions</h1>
+        <h2>Stock Transactions</h2>
+        <form action="/stocktransactions" method="POST">
+            <select name="investorid" required>
+                <% investors.forEach(function(investor) { %>
+                    <option value="<%= investor.id %>"><%= investor.firstname %> <%= investor.lastname %></option>
+                <% }) %>
+            </select>
+            <select name="stockid" required>
+                <% stocks.forEach(function(stock) { %>
+                    <option value="<%= stock.id %>"><%= stock.stockname %> (<%= stock.abbreviation %>)</option>
+                <% }) %>
+            </select>
+            <input type="number" name="quantity" placeholder="Quantity" required>
+            <button type="submit">Add Stock Transaction</button>
+        </form>
+        <ul>
+            <% stocktransactions.forEach(function(transaction) { %>
+                <li>
+                    Investor: <%= transaction.investor_name %>, 
+                    Stock: <%= transaction.stock_name %>, 
+                    Quantity: <%= transaction.quantity %>
+                </li>
+            <% }) %>
+        </ul>
+
+        <h2>Bond Transactions</h2>
+        <form action="/bondtransactions" method="POST">
+            <select name="investorid" required>
+                <% investors.forEach(function(investor) { %>
+                    <option value="<%= investor.id %>"><%= investor.firstname %> <%= investor.lastname %></option>
+                <% }) %>
+            </select>
+            <select name="bondid" required>
+                <% bonds.forEach(function(bond) { %>
+                    <option value="<%= bond.id %>"><%= bond.bondname %> (<%= bond.abbreviation %>)</option>
+                <% }) %>
+            </select>
+            <input type="number" name="quantity" placeholder="Quantity" required>
+            <button type="submit">Add Bond Transaction</button>
+        </form>
+        <ul>
+            <% bondtransactions.forEach(function(transaction) { %>
+                <li>
+                    Investor: <%= transaction.investor_name %>, 
+                    Bond: <%= transaction.bond_name %>, 
+                    Quantity: <%= transaction.quantity %>
+                </li>
+            <% }) %>
+        </ul>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>
