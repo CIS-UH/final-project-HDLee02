@@ -4,7 +4,7 @@ import creds
 from sql import create_connection, execute_query, execute_read_query
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+# app.config["DEBUG"] = True
 
 # Set up your connection
 myCreds = creds.Creds()
